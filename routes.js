@@ -33,19 +33,45 @@ router.post("/foodmenu",async(req,res)=>{
 })
 
 
+// api for updating data
+router.patch('/foodmenu/:id',async (req,res)=>{
+    const foodmenu = await Menu.findOne({_id:req.params.id})
+    foodmenu.name = req.body.name
+    foodmenu.category = req.body.category
+    foodmenu.price=req.body.price
+
+    await foodmenu.save((err,msg)=>{
+        if(err){
+            res.status(500).json({
+                error:err
+            })
+        }
+        else{
+            res.status(200).json({
+                msg:msg
+            })
+        }
+    })
+})
 
 
+//delete api
 
+router.delete("/foodmenu/:name",async(req,res)=>{
+    await Menu.deleteOne({name:req.params.name},(err,msg)=>{
+        if(err){
+            res.status(500).json({
+                error:err
+            })
+        }
+        else{
+            res.status(200).json({
+                msg:msg
+            })
+        }
 
-
-
-
-
-
-
-
-
-
+    })
+})
 
 
 
