@@ -55,24 +55,10 @@ router.patch('/foodmenu/:id',async (req,res)=>{
 })
 
 
-//delete api
-
-router.delete("/foodmenu/:name",async(req,res)=>{
-    const deleteItem = await Menu.deleteOne({name:req.params.name},(err,msg)=>{
-        if(err){
-            res.status(500).json({
-                error:err
-            })
-        }
-        else{
-            res.status(200).json({
-                msg:msg
-            })
-        }
-
-    })
+router.delete('/foodmenu/:id', async (request, response) => {   // delete by id
+    const _id = request.params.id;
+    const strategy = await Menu.findByIdAndDelete(_id);
+    response.send(strategy);
 })
 
-
-
-module.exports = router 
+module.exports = router;
