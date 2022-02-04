@@ -58,7 +58,9 @@ router.patch('/foodmenu/:id',async (req,res)=>{
 //delete api
 
 router.delete("/foodmenu/:name",async(req,res)=>{
-    await Menu.deleteOne({name:req.params.name},(err,msg)=>{
+    const deleteItem = await Menu.deleteOne({name:req.params.name})
+        
+        await deleteItem.save((err,msg)=>{
         if(err){
             res.status(500).json({
                 error:err
