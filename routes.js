@@ -55,10 +55,10 @@ router.patch('/foodmenu/:id',async (req,res)=>{
 })
 
 
-router.delete('/foodmenu/:id', async (request, response) => {   // delete by id
-    const _id = request.params.id;
-    const strategy = await Menu.findByIdAndDelete(_id);
-    response.send(strategy);
+router.delete('/foodmenu/:id', async (req, res) => {   // delete by id
+    const _id = req.params.id;
+    const deleteItem = await Menu.findByIdAndDelete(_id);
+    res.send(deleteItem);
 })
 
 module.exports = router;
